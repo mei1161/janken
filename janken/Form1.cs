@@ -12,30 +12,14 @@ namespace janken
 {
     public partial class Form1 : Form
     {
-        public int choice;
-        public int player2 = 2; 
-        private void battle()
+        Buttle bt = new Buttle();
+        private int choice;
+        public int getChoice()
         {
-            if ((player2-choice +3) % 3 == 0)
-            {
-                label1.Text = "あいこ";
-            }
-            else if ((player2-choice +3) % 3 == 1)
-            {
-                label1.Text = "あなたのかち";
-            }
-            else if ((player2-choice+3) % 3 == 2)
-            {
-                label1.Text = "あなたのまけ";
-            }
-            switch (player2)
-            {
-                case 1: label2.Text = "相手:グー";break;
-                case 2: label2.Text = "相手:チョキ";break;
-                case 3: label2.Text = "相手:パー";break;
-            }
-
+            return choice;
         }
+
+       
         public Form1()
         {
             InitializeComponent();
@@ -43,18 +27,24 @@ namespace janken
         private void button1_Click(object sender, EventArgs e)
         {
             choice = 1;
-            battle();
+            set_buttle();
         }
         private void button2_Click_1(object sender, EventArgs e)
         {
             choice = 2;
-            battle();
+            set_buttle();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
             choice = 3;
-            battle();
+            set_buttle();
+        }
+        private void set_buttle()
+        {
+            bt.buttle(getChoice());
+            label1.Text = bt.show_Result();
+            label2.Text = bt.show_Opponent();
         }
 
 
