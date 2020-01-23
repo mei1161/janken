@@ -16,7 +16,7 @@ namespace mei1161
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Janken());
+            Application.Run(new Config());
         }
     }
 }

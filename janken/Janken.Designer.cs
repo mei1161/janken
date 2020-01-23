@@ -75,7 +75,7 @@
             // 
             this.lbl_result.AutoSize = true;
             this.lbl_result.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.lbl_result.Location = new System.Drawing.Point(223, 287);
+            this.lbl_result.Location = new System.Drawing.Point(331, 287);
             this.lbl_result.Name = "lbl_result";
             this.lbl_result.Size = new System.Drawing.Size(122, 40);
             this.lbl_result.TabIndex = 3;
@@ -85,7 +85,7 @@
             // 
             this.lbl_player2.AutoSize = true;
             this.lbl_player2.Font = new System.Drawing.Font("MS UI Gothic", 20F);
-            this.lbl_player2.Location = new System.Drawing.Point(602, 287);
+            this.lbl_player2.Location = new System.Drawing.Point(645, 298);
             this.lbl_player2.Name = "lbl_player2";
             this.lbl_player2.Size = new System.Drawing.Size(98, 27);
             this.lbl_player2.TabIndex = 4;

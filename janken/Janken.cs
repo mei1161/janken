@@ -49,5 +49,6 @@ namespace mei1161
 
             lbl_player2.Text = Enum.GetName(typeof(libJanken.Choice), player2_choice);
         }
+
     }
 }

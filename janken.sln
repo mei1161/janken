@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libJanken", "libJanken\libJ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Janken", "janken\Janken.csproj", "{F2A635E7-BBC1-47A6-9217-2596CBA334BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libNetwork", "libNetwork\libNetwork.csproj", "{027F60E8-69B5-4F82-BD2B-75EC152AD069}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F2A635E7-BBC1-47A6-9217-2596CBA334BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2A635E7-BBC1-47A6-9217-2596CBA334BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2A635E7-BBC1-47A6-9217-2596CBA334BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027F60E8-69B5-4F82-BD2B-75EC152AD069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027F60E8-69B5-4F82-BD2B-75EC152AD069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027F60E8-69B5-4F82-BD2B-75EC152AD069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027F60E8-69B5-4F82-BD2B-75EC152AD069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
