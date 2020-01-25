@@ -7,8 +7,8 @@
     <ProjectGuid>{40D340D4-BAF0-4A33-9246-E813E67426FC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>libJanken</RootNamespace>
-    <AssemblyName>libJanken</AssemblyName>
+    <RootNamespace>mei1161</RootNamespace>
+    <AssemblyName>LibJanken</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

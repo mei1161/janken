@@ -1,6 +1,6 @@
 ﻿namespace mei1161
 {
-    public class libJanken
+    public class LibJanken
     {
         public enum Result : int
         {
@@ -23,7 +23,7 @@
 
         public delegate void ResultDelegate(int player2_choice, int result);
 
-        public libJanken(ResultDelegate result_delegate)
+        public LibJanken(ResultDelegate result_delegate)
         {
             this.result_delegate = result_delegate;
         }

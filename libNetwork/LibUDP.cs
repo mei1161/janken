@@ -10,34 +10,39 @@ using System.Threading.Tasks;
 
 namespace mei1161
 {
-    public class libNetwork
+    public class libUDP
     {
         Thread Broadcast_thread;
         UdpClient sender_client;
         UdpClient listener_client;
 
-        public delegate void BroadcastResponseDelegate(String response, IPEndPoint peer_endpoint);
-        private delegate void BroadcastServerDelegate(int port, BroadcastResponseDelegate callback);
-
-        public libNetwork()
-        {
-
-        }
+        public delegate void ListenerResponseDelegate(String response, IPEndPoint peer_endpoint);
+        private delegate void BroadcastServerDelegate(int port, ListenerResponseDelegate callback);
 
         public void SendBroadcastMessage(int port, String message)
         {
             byte[] buffer = Encoding.UTF8.GetBytes(message);
-            sender_client = new UdpClient(port);
+            sender_client = new UdpClient();
             sender_client.EnableBroadcast = true;
             sender_client.Connect(new IPEndPoint(IPAddress.Broadcast, port));
             sender_client.Send(buffer, buffer.Length);
             sender_client.Close();
         }
 
-        public void ListenBroadcastMessage(int port, BroadcastResponseDelegate callback)
+        public void SendMessage(int port, IPAddress address, String message)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            sender_client = new UdpClient();
+            sender_client.EnableBroadcast = true;
+            sender_client.Connect(new IPEndPoint(address, port));
+            sender_client.Send(buffer, buffer.Length);
+            sender_client.Close();
+        }
+
+        public void ListenMessage(int port, ListenerResponseDelegate callback)
         {
             Object[] param = { port, callback };
-            ParameterizedThreadStart ts = new ParameterizedThreadStart(BroadcastServerStart);
+            ParameterizedThreadStart ts = new ParameterizedThreadStart(ListenerStart);
             Broadcast_thread = new Thread(ts);
             Broadcast_thread.Start(param);
             Broadcast_thread.IsBackground = true;
@@ -50,12 +55,12 @@ namespace mei1161
         }
 
 
-        private void BroadcastServerStart(Object obj)
+        private void ListenerStart(Object obj)
         {
                 Object[] param = (Object[])obj;
                 int port = (int)param[0];
-                BroadcastResponseDelegate callback = (BroadcastResponseDelegate)param[1];
-                // ブロードキャストを監視するエンドポイント
+                ListenerResponseDelegate callback = (ListenerResponseDelegate)param[1];
+                // 通信を監視するエンドポイント
                 IPEndPoint remote = new IPEndPoint(IPAddress.Any, port);
 
                 // UdpClientを生成

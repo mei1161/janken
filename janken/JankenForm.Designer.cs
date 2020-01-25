@@ -28,48 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_rock = new System.Windows.Forms.Button();
+            this.btn_scissors = new System.Windows.Forms.Button();
+            this.btn_paper = new System.Windows.Forms.Button();
             this.lbl_result = new System.Windows.Forms.Label();
             this.lbl_player2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Tomato;
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.button1.Location = new System.Drawing.Point(31, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(227, 108);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "グー";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_rock.BackColor = System.Drawing.Color.Tomato;
+            this.btn_rock.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.btn_rock.Location = new System.Drawing.Point(31, 54);
+            this.btn_rock.Name = "button1";
+            this.btn_rock.Size = new System.Drawing.Size(227, 108);
+            this.btn_rock.TabIndex = 0;
+            this.btn_rock.Text = "グー";
+            this.btn_rock.UseVisualStyleBackColor = false;
+            this.btn_rock.Click += new System.EventHandler(this.SelectRock);
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.button2.Location = new System.Drawing.Point(279, 54);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(239, 108);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "チョキ";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.btn_scissors.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_scissors.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.btn_scissors.Location = new System.Drawing.Point(279, 54);
+            this.btn_scissors.Name = "button2";
+            this.btn_scissors.Size = new System.Drawing.Size(239, 108);
+            this.btn_scissors.TabIndex = 1;
+            this.btn_scissors.Text = "チョキ";
+            this.btn_scissors.UseVisualStyleBackColor = false;
+            this.btn_scissors.Click += new System.EventHandler(this.SelectScissors);
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.Gold;
-            this.button3.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.button3.Location = new System.Drawing.Point(536, 54);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(236, 108);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "パー";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.btn_paper.BackColor = System.Drawing.Color.Gold;
+            this.btn_paper.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.btn_paper.Location = new System.Drawing.Point(536, 54);
+            this.btn_paper.Name = "button3";
+            this.btn_paper.Size = new System.Drawing.Size(236, 108);
+            this.btn_paper.TabIndex = 2;
+            this.btn_paper.Text = "パー";
+            this.btn_paper.UseVisualStyleBackColor = false;
+            this.btn_paper.Click += new System.EventHandler(this.SelectPaper);
             // 
             // lbl_result
             // 
@@ -98,9 +98,9 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lbl_player2);
             this.Controls.Add(this.lbl_result);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_paper);
+            this.Controls.Add(this.btn_scissors);
+            this.Controls.Add(this.btn_rock);
             this.Name = "JankenForm";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.JankenForm_FormClosed);
@@ -111,9 +111,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_rock;
+        private System.Windows.Forms.Button btn_scissors;
+        private System.Windows.Forms.Button btn_paper;
         private System.Windows.Forms.Label lbl_result;
         private System.Windows.Forms.Label lbl_player2;
     }

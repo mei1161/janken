@@ -91,13 +91,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\libJanken\libJanken.csproj">
+    <ProjectReference Include="..\libJanken\LibJanken.csproj">
       <Project>{40d340d4-baf0-4a33-9246-e813e67426fc}</Project>
-      <Name>libJanken</Name>
+      <Name>LibJanken</Name>
     </ProjectReference>
-    <ProjectReference Include="..\libNetwork\libUDP.csproj">
+    <ProjectReference Include="..\libNetwork\LibUDP.csproj">
       <Project>{027f60e8-69b5-4f82-bd2b-75ec152ad069}</Project>
-      <Name>libUDP</Name>
+      <Name>LibUDP</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
