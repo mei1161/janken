@@ -4,20 +4,25 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace mei1161
 {
-    public partial class Janken : Form
+    public partial class JankenForm : Form
     {
         libJanken bt;
         Random random;
+        IPAddress peer_address;
+        ShowConfigFormDelegate show_config;
 
 
-        public Janken()
+        public JankenForm(ShowConfigFormDelegate show_config, IPAddress address)
         {
             InitializeComponent();
+            peer_address = address;
+            this.show_config = show_config;
             lbl_result.Text = "";
             lbl_player2.Text = "";
             libJanken.ResultDelegate result_delegate = new libJanken.ResultDelegate(SetResult);
@@ -50,5 +55,9 @@ namespace mei1161
             lbl_player2.Text = Enum.GetName(typeof(libJanken.Choice), player2_choice);
         }
 
+        private void JankenForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            show_config();
+        }
     }
 }

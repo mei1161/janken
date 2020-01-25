@@ -46,25 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.cs">
+    <Compile Include="mei1161.cs" />
+    <Compile Include="ConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Config.Designer.cs">
-      <DependentUpon>Config.cs</DependentUpon>
+    <Compile Include="ConfigForm.Designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Janken.cs">
+    <Compile Include="JankenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Janken.Designer.cs">
-      <DependentUpon>Janken.cs</DependentUpon>
+    <Compile Include="JankenForm.Designer.cs">
+      <DependentUpon>JankenForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Config.resx">
-      <DependentUpon>Config.cs</DependentUpon>
+    <EmbeddedResource Include="ConfigForm.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Janken.resx">
-      <DependentUpon>Janken.cs</DependentUpon>
+    <EmbeddedResource Include="JankenForm.resx">
+      <DependentUpon>JankenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,9 +95,9 @@
       <Project>{40d340d4-baf0-4a33-9246-e813e67426fc}</Project>
       <Name>libJanken</Name>
     </ProjectReference>
-    <ProjectReference Include="..\libNetwork\libNetwork.csproj">
+    <ProjectReference Include="..\libNetwork\libUDP.csproj">
       <Project>{027f60e8-69b5-4f82-bd2b-75ec152ad069}</Project>
-      <Name>libNetwork</Name>
+      <Name>libUDP</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

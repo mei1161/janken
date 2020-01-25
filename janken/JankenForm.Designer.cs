@@ -1,6 +1,6 @@
 ﻿namespace mei1161
 {
-    partial class Janken
+    partial class JankenForm
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -91,7 +91,7 @@
             this.lbl_player2.TabIndex = 4;
             this.lbl_player2.Text = "Player2";
             // 
-            // Janken
+            // JankenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -101,8 +101,9 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "Janken";
+            this.Name = "JankenForm";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.JankenForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
