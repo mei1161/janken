@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static mei1161.LibJanken;
+using static mei1161.LibUDP;
+
 namespace mei1161
 {
     public partial class JankenForm : Form
@@ -18,7 +14,7 @@ namespace mei1161
         IPAddress peer_address;
         ShowConfigFormDelegate show_config;
         LibUDP network;
-        LibUDP.ListenerResponseDelegate listener_result_delegate;
+        ListenerResponseDelegate listener_result_delegate;
 
 
         public JankenForm(ShowConfigFormDelegate show_config, IPAddress address)
@@ -26,8 +22,9 @@ namespace mei1161
             InitializeComponent();
             this.show_config = show_config;
             lbl_result.Text = "";
+            lbl_player1.Text = "";
             lbl_player2.Text = "";
-            LibJanken.ResultDelegate result_delegate = new LibJanken.ResultDelegate(SetResult);
+            ResultDelegate result_delegate = new ResultDelegate(JankenResponse);
             this.bt = new LibJanken(result_delegate);
             this.random = new Random(1000);
 
@@ -35,28 +32,36 @@ namespace mei1161
             peer_address = address;
 
 
-            listener_result_delegate = new LibUDP.ListenerResponseDelegate(ListenerResponse);
+            listener_result_delegate = new ListenerResponseDelegate(ListenerResponse);
             network.ListenMessage(GAME_PORT, listener_result_delegate);
         }
  
         private void SelectRock(object sender, EventArgs e)
         {
-            bt.SetPlayer1(LibJanken.Choice.グー);
+            if (!bt.SetPlayer1(Choice.グー))
+            {
+                LockSelect();
+            }
             network.SendMessage(GAME_PORT, peer_address, "0");
-            LockSelect();
         }
         private void SelectScissors(object sender, EventArgs e)
         {
-            bt.SetPlayer1(LibJanken.Choice.チョキ);
+            if (!bt.SetPlayer1(Choice.チョキ))
+            {
+                LockSelect();
+            }
             network.SendMessage(GAME_PORT, peer_address, "1");
-            LockSelect();
         }
 
         private void SelectPaper(object sender, EventArgs e)
         {
-            bt.SetPlayer1(LibJanken.Choice.パー);
+            
+            if (!bt.SetPlayer1(Choice.パー))
+            {
+                LockSelect();
+            }
+
             network.SendMessage(GAME_PORT, peer_address, "2");
-            LockSelect();
 
         }
 
@@ -66,35 +71,54 @@ namespace mei1161
             btn_scissors.Enabled = false;
             btn_paper.Enabled = false;
         }
+
         private void UnlockSelect()
         {
             btn_rock.Enabled = true;
             btn_scissors.Enabled = true;
             btn_paper.Enabled = true;
-            network.ListenMessage(GAME_PORT, listener_result_delegate);
         }
 
-
-        private void SetResult(LibJanken.Choice player1_choice, LibJanken.Choice player2_choice, LibJanken.Result result)
+        private void JankenResponse(Choice player1_choice, Choice player2_choice, Result result)
         {
-
-            lbl_result.Text = Enum.GetName(typeof(LibJanken.Result), result);
-
-            lbl_player2.Text = Enum.GetName(typeof(LibJanken.Choice), player2_choice);
+            BeginInvoke(new SetResultDelegate(SetResult), new object[] { player1_choice, player2_choice, result });
         }
-        
+
+        private void SetResult(Choice player1_choice, Choice player2_choice, Result result)
+        {
+            lbl_result.Text = result.ToString();
+            lbl_player1.Text = player1_choice.ToString();
+            lbl_player2.Text = player2_choice.ToString();
+            UnlockSelect();
+        }
+
         public void ListenerResponse(String response, IPEndPoint peer_endpoint)
         {
-            if(response == "9"){
+            if(response == "9")
+            {
+                network.CloseListener();
                 this.Close();
             }
-            bt.SetPlayer2((LibJanken.Choice)int.Parse(response));
-            UnlockSelect();
+            bt.SetPlayer2((Choice)int.Parse(response));
+            try
+            {
+                network.ListenMessage(GAME_PORT, listener_result_delegate);
+            }catch(Exception e)
+            {
+                BeginInvoke(new ShowMessageDelegate(ShowMessage), new object[] { e.Message });
+            }
         }
 
         private void JankenForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            network.SendMessage(GAME_PORT, peer_address, "9");
+            network.CloseListener();
             show_config();
+        }
+
+        private void ShowMessage(String message)
+        {
+            MessageBox.Show(message);
         }
 
         

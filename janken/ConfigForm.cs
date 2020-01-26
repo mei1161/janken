@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static mei1161.LibUDP;
 
 namespace mei1161
 {
@@ -75,7 +68,7 @@ namespace mei1161
             button_state = false;
             btn_sender.Enabled = false;
             btn_recever.Text = "待ち受けを停止する";
-            LibUDP.ListenerResponseDelegate result_delegate = new LibUDP.ListenerResponseDelegate(ListenerResponse);
+            ListenerResponseDelegate result_delegate = new ListenerResponseDelegate(ListenerResponse);
             network.ListenMessage(SENDER_PORT, result_delegate);
         }
 
@@ -93,7 +86,7 @@ namespace mei1161
             btn_recever.Enabled = false;
             btn_sender.Text = "探すのをやめる";
             network.SendBroadcastMessage(SENDER_PORT, "Hello");
-            LibUDP.ListenerResponseDelegate result_delegate = new LibUDP.ListenerResponseDelegate(SenderResponse);
+            LibUDP.ListenerResponseDelegate result_delegate = new ListenerResponseDelegate(SenderResponse);
             network.ListenMessage(RECEVER_PORT, result_delegate);
         }
 

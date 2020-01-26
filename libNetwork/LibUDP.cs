@@ -12,7 +12,8 @@ namespace mei1161
 {
     public class LibUDP
     {
-        Thread Broadcast_thread;
+        //リスナー用スレッド
+        Thread listener_thread;
         UdpClient sender_client;
         UdpClient listener_client;
 
@@ -43,20 +44,22 @@ namespace mei1161
         {
             Object[] param = { port, callback };
             ParameterizedThreadStart ts = new ParameterizedThreadStart(ListenerStart);
-            Broadcast_thread = new Thread(ts);
-            Broadcast_thread.Start(param);
-            Broadcast_thread.IsBackground = true;
+            listener_thread = new Thread(ts);
+            listener_thread.Start(param);
+            listener_thread.IsBackground = true;
         }
 
         public void CloseListener()
         {
             listener_client.Close();
-            Broadcast_thread.Abort();
+            listener_thread.Abort();
         }
 
 
         private void ListenerStart(Object obj)
         {
+            try
+            {
                 Object[] param = (Object[])obj;
                 int port = (int)param[0];
                 ListenerResponseDelegate callback = (ListenerResponseDelegate)param[1];
@@ -76,10 +79,11 @@ namespace mei1161
                 // 受信イベントを実行
                 callback(response, remote);
                 listener_client.Close();
+            }
+            catch (Exception e)
+            {
+                Console.Write("Error");
+            }
         }
     }
-
-
-
 }
-
