@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace mei1161
 {
-    public class libUDP
+    public class LibUDP
     {
         Thread Broadcast_thread;
         UdpClient sender_client;

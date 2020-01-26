@@ -17,8 +17,8 @@ namespace mei1161
         const int GAME_PORT = 4096;
         IPAddress peer_address;
         ShowConfigFormDelegate show_config;
-        libUDP network;
-        libUDP.ListenerResponseDelegate listener_result_delegate;
+        LibUDP network;
+        LibUDP.ListenerResponseDelegate listener_result_delegate;
 
 
         public JankenForm(ShowConfigFormDelegate show_config, IPAddress address)
@@ -31,30 +31,30 @@ namespace mei1161
             this.bt = new LibJanken(result_delegate);
             this.random = new Random(1000);
 
-            network = new libUDP();
+            network = new LibUDP();
             peer_address = address;
 
 
-            listener_result_delegate = new libUDP.ListenerResponseDelegate(ListenerResponse);
+            listener_result_delegate = new LibUDP.ListenerResponseDelegate(ListenerResponse);
             network.ListenMessage(GAME_PORT, listener_result_delegate);
         }
  
         private void SelectRock(object sender, EventArgs e)
         {
-            bt.SetPlayer1((int)LibJanken.Choice.グー);
+            bt.SetPlayer1(LibJanken.Choice.グー);
             network.SendMessage(GAME_PORT, peer_address, "0");
             LockSelect();
         }
         private void SelectScissors(object sender, EventArgs e)
         {
-            bt.SetPlayer1((int)LibJanken.Choice.チョキ);
+            bt.SetPlayer1(LibJanken.Choice.チョキ);
             network.SendMessage(GAME_PORT, peer_address, "1");
             LockSelect();
         }
 
         private void SelectPaper(object sender, EventArgs e)
         {
-            bt.SetPlayer1((int)LibJanken.Choice.パー);
+            bt.SetPlayer1(LibJanken.Choice.パー);
             network.SendMessage(GAME_PORT, peer_address, "2");
             LockSelect();
 
@@ -75,7 +75,7 @@ namespace mei1161
         }
 
 
-        private void SetResult(int player2_choice, int result)
+        private void SetResult(LibJanken.Choice player1_choice, LibJanken.Choice player2_choice, LibJanken.Result result)
         {
 
             lbl_result.Text = Enum.GetName(typeof(LibJanken.Result), result);
@@ -88,7 +88,7 @@ namespace mei1161
             if(response == "9"){
                 this.Close();
             }
-            bt.SetPlayer2(int.Parse(response));
+            bt.SetPlayer2((LibJanken.Choice)int.Parse(response));
             UnlockSelect();
         }
 

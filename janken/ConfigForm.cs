@@ -16,7 +16,7 @@ namespace mei1161
     {
         const int SENDER_PORT = 1024;
         const int RECEVER_PORT = 2048;
-        libUDP network;
+        LibUDP network;
         bool button_state = true;
         JankenForm janken_form;
 
@@ -27,7 +27,7 @@ namespace mei1161
         public ConfigForm()
         {
             InitializeComponent();
-            network = new libUDP();
+            network = new LibUDP();
 
         }
 
@@ -75,7 +75,7 @@ namespace mei1161
             button_state = false;
             btn_sender.Enabled = false;
             btn_recever.Text = "待ち受けを停止する";
-            libUDP.ListenerResponseDelegate result_delegate = new libUDP.ListenerResponseDelegate(ListenerResponse);
+            LibUDP.ListenerResponseDelegate result_delegate = new LibUDP.ListenerResponseDelegate(ListenerResponse);
             network.ListenMessage(SENDER_PORT, result_delegate);
         }
 
@@ -93,7 +93,7 @@ namespace mei1161
             btn_recever.Enabled = false;
             btn_sender.Text = "探すのをやめる";
             network.SendBroadcastMessage(SENDER_PORT, "Hello");
-            libUDP.ListenerResponseDelegate result_delegate = new libUDP.ListenerResponseDelegate(SenderResponse);
+            LibUDP.ListenerResponseDelegate result_delegate = new LibUDP.ListenerResponseDelegate(SenderResponse);
             network.ListenMessage(RECEVER_PORT, result_delegate);
         }
 
