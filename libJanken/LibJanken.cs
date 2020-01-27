@@ -55,6 +55,7 @@
         {
             if (player1_status && player2_status)
             {
+                //じゃんけんをして、結果を返す
                 result_delegate(player1_choice, player2_choice, (Result)((player2_choice - player1_choice + 3) % 3));
                 //ステータス初期化
                 player1_status = player2_status = false;

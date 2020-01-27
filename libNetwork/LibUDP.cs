@@ -22,11 +22,17 @@ namespace mei1161
 
         public void SendBroadcastMessage(int port, String message)
         {
+            //messageをutf8でエンコードする
             byte[] buffer = Encoding.UTF8.GetBytes(message);
+
             sender_client = new UdpClient();
+            //ブロードキャストパケットの送受信を許可する
             sender_client.EnableBroadcast = true;
+            //IPブロードキャストアドレス、ポート番号を指定し接続を確立する
             sender_client.Connect(new IPEndPoint(IPAddress.Broadcast, port));
+            //UDPデータグラムをリモートホストに送信
             sender_client.Send(buffer, buffer.Length);
+            //UDP接続を終了
             sender_client.Close();
         }
 
@@ -35,6 +41,7 @@ namespace mei1161
             byte[] buffer = Encoding.UTF8.GetBytes(message);
             sender_client = new UdpClient();
             sender_client.EnableBroadcast = true;
+            //アドレス、ポート番号を指定し、接続
             sender_client.Connect(new IPEndPoint(address, port));
             sender_client.Send(buffer, buffer.Length);
             sender_client.Close();
@@ -43,15 +50,19 @@ namespace mei1161
         public void ListenMessage(int port, ListenerResponseDelegate callback)
         {
             Object[] param = { port, callback };
+            //スレッド作成時にデータを渡す
             ParameterizedThreadStart ts = new ParameterizedThreadStart(ListenerStart);
+            //スレッド作成
             listener_thread = new Thread(ts);
             listener_thread.Start(param);
+            //バックグラウンドスレッドにする
             listener_thread.IsBackground = true;
         }
 
         public void CloseListener()
         {
             listener_client.Close();
+            //スレッドを終了させる
             listener_thread.Abort();
         }
 
@@ -60,7 +71,9 @@ namespace mei1161
         {
             try
             {
+                //キャスト
                 Object[] param = (Object[])obj;
+                //ポートを設定
                 int port = (int)param[0];
                 ListenerResponseDelegate callback = (ListenerResponseDelegate)param[1];
                 // 通信を監視するエンドポイント
