@@ -12,6 +12,7 @@ namespace mei1161
         LibUDP network;
         bool button_state = true;
         JankenForm janken_form;
+        ListenerExceptionDelegate listener_exception_delegate;
 
         public delegate void JankenFormDelegate(IPAddress address);
         public delegate void ListenerEndDelegate();
@@ -21,6 +22,8 @@ namespace mei1161
         {
             InitializeComponent();
             network = new LibUDP();
+            listener_exception_delegate = new ListenerExceptionDelegate(ShowExceptionMessage);
+
 
         }
 
@@ -69,7 +72,7 @@ namespace mei1161
             btn_sender.Enabled = false;
             btn_recever.Text = "待ち受けを停止する";
             ListenerResponseDelegate result_delegate = new ListenerResponseDelegate(ListenerResponse);
-            network.ListenMessage(SENDER_PORT, result_delegate);
+            network.ListenMessage(SENDER_PORT, result_delegate, listener_exception_delegate);
         }
 
         public void ListenerEnd()
@@ -87,7 +90,7 @@ namespace mei1161
             btn_sender.Text = "探すのをやめる";
             network.SendBroadcastMessage(SENDER_PORT, "Hello");
             LibUDP.ListenerResponseDelegate result_delegate = new ListenerResponseDelegate(SenderResponse);
-            network.ListenMessage(RECEVER_PORT, result_delegate);
+            network.ListenMessage(RECEVER_PORT, result_delegate, listener_exception_delegate);
         }
 
         public void SenderEnd()
@@ -110,6 +113,18 @@ namespace mei1161
         {
             this.Show();
         }
+        //メッセージボックスを表示
+        private void ShowExceptionMessage(Exception e)
+        {
+            BeginInvoke(new ShowMessageDelegate(ShowMessage), new object[] { e.Message });
+        }
+
+        //メッセージボックスを表示
+        private void ShowMessage(String message)
+        {
+            MessageBox.Show(message);
+        }
+
 
     }
 }

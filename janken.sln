@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibJanken", "libJanken\LibJanken.csproj", "{40D340D4-BAF0-4A33-9246-E813E67426FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibJanken", "LibJanken\LibJanken.csproj", "{40D340D4-BAF0-4A33-9246-E813E67426FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Janken", "janken\Janken.csproj", "{F2A635E7-BBC1-47A6-9217-2596CBA334BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Janken", "Janken\Janken.csproj", "{F2A635E7-BBC1-47A6-9217-2596CBA334BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibUDP", "libNetwork\LibUDP.csproj", "{027F60E8-69B5-4F82-BD2B-75EC152AD069}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibUDP", "LibUDP\LibUDP.csproj", "{027F60E8-69B5-4F82-BD2B-75EC152AD069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

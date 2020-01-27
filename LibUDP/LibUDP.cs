@@ -18,7 +18,8 @@ namespace mei1161
         UdpClient listener_client;
 
         public delegate void ListenerResponseDelegate(String response, IPEndPoint peer_endpoint);
-        private delegate void BroadcastServerDelegate(int port, ListenerResponseDelegate callback);
+        public delegate void ListenerExceptionDelegate(Exception e);
+        private delegate void BroadcastServerDelegate(int port, ListenerResponseDelegate callback, ListenerExceptionDelegate exception);
 
         public void SendBroadcastMessage(int port, String message)
         {
@@ -47,9 +48,9 @@ namespace mei1161
             sender_client.Close();
         }
 
-        public void ListenMessage(int port, ListenerResponseDelegate callback)
+        public void ListenMessage(int port, ListenerResponseDelegate callback, ListenerExceptionDelegate exception)
         {
-            Object[] param = { port, callback };
+            Object[] param = { port, callback, exception };
             //スレッド作成時にデータを渡す
             ParameterizedThreadStart ts = new ParameterizedThreadStart(ListenerStart);
             //スレッド作成
@@ -69,13 +70,14 @@ namespace mei1161
 
         private void ListenerStart(Object obj)
         {
+            //キャスト
+            Object[] param = (Object[])obj;
+            //ポートを設定
+            int port = (int)param[0];
+            ListenerResponseDelegate callback = (ListenerResponseDelegate)param[1];
+            ListenerExceptionDelegate exception = (ListenerExceptionDelegate)param[2];
             try
             {
-                //キャスト
-                Object[] param = (Object[])obj;
-                //ポートを設定
-                int port = (int)param[0];
-                ListenerResponseDelegate callback = (ListenerResponseDelegate)param[1];
                 // 通信を監視するエンドポイント
                 IPEndPoint remote = new IPEndPoint(IPAddress.Any, port);
 
@@ -93,9 +95,13 @@ namespace mei1161
                 callback(response, remote);
                 listener_client.Close();
             }
+            catch (ThreadAbortException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             catch (Exception e)
             {
-                Console.Write("Error");
+                exception(e);
             }
         }
     }

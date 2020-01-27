@@ -91,11 +91,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\libJanken\LibJanken.csproj">
+    <ProjectReference Include="..\LibJanken\LibJanken.csproj">
       <Project>{40d340d4-baf0-4a33-9246-e813e67426fc}</Project>
       <Name>LibJanken</Name>
     </ProjectReference>
-    <ProjectReference Include="..\libNetwork\LibUDP.csproj">
+    <ProjectReference Include="..\LibUDP\LibUDP.csproj">
       <Project>{027f60e8-69b5-4f82-bd2b-75ec152ad069}</Project>
       <Name>LibUDP</Name>
     </ProjectReference>

@@ -15,6 +15,7 @@ namespace mei1161
         ShowConfigFormDelegate show_config;
         LibUDP network;
         ListenerResponseDelegate listener_result_delegate;
+        ListenerExceptionDelegate listener_exception_delegate;
 
 
         public JankenForm(ShowConfigFormDelegate show_config, IPAddress address)
@@ -33,7 +34,8 @@ namespace mei1161
 
 
             listener_result_delegate = new ListenerResponseDelegate(ListenerResponse);
-            network.ListenMessage(GAME_PORT, listener_result_delegate);
+            listener_exception_delegate = new ListenerExceptionDelegate(ShowExceptionMessage);
+            network.ListenMessage(GAME_PORT, listener_result_delegate, listener_exception_delegate);
         }
  
         //グーを選択した場合
@@ -96,6 +98,7 @@ namespace mei1161
             lbl_player2.Text = player2_choice.ToString();
             //選択の初期化(もう一度選択ができるようになる)
             UnlockSelect();
+            network.ListenMessage(GAME_PORT, listener_result_delegate, listener_exception_delegate);
         }
 
         public void ListenerResponse(String response, IPEndPoint peer_endpoint)
@@ -109,13 +112,6 @@ namespace mei1161
             }
             //プレイヤー2の設定をする
             bt.SetPlayer2((Choice)int.Parse(response));
-            try
-            {
-                network.ListenMessage(GAME_PORT, listener_result_delegate);
-            }catch(Exception e)
-            {
-                BeginInvoke(new ShowMessageDelegate(ShowMessage), new object[] { e.Message });
-            }
         }
 
         private void JankenForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -127,11 +123,18 @@ namespace mei1161
             show_config();
         }
         //メッセージボックスを表示
+        private void ShowExceptionMessage(Exception e)
+        {
+            BeginInvoke(new ShowMessageDelegate(ShowMessage), new object[] { e.Message });
+        }
+
+        //メッセージボックスを表示
         private void ShowMessage(String message)
         {
             MessageBox.Show(message);
         }
 
-        
+
+
     }
 }
