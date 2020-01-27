@@ -22,11 +22,11 @@ namespace mei1161
 
         public void SendBroadcastMessage(int port, String message)
         {
-            //messageをutf8でエンコードする
+            //messageをutf8でByte列にする
             byte[] buffer = Encoding.UTF8.GetBytes(message);
 
             sender_client = new UdpClient();
-            //ブロードキャストパケットの送受信を許可する
+            //ブロードキャストパケットの送信を許可する
             sender_client.EnableBroadcast = true;
             //IPブロードキャストアドレス、ポート番号を指定し接続を確立する
             sender_client.Connect(new IPEndPoint(IPAddress.Broadcast, port));
