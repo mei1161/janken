@@ -88,17 +88,17 @@
             // lbl_player2
             // 
             this.lbl_player2.AutoSize = true;
-            this.lbl_player2.Font = new System.Drawing.Font("MS UI Gothic", 20F);
-            this.lbl_player2.Location = new System.Drawing.Point(645, 298);
+            this.lbl_player2.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.lbl_player2.Location = new System.Drawing.Point(620, 271);
             this.lbl_player2.Name = "lbl_player2";
-            this.lbl_player2.Size = new System.Drawing.Size(98, 27);
+            this.lbl_player2.Size = new System.Drawing.Size(142, 40);
             this.lbl_player2.TabIndex = 4;
             this.lbl_player2.Text = "Player2";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 242);
+            this.label1.Location = new System.Drawing.Point(65, 242);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 5;
@@ -116,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(667, 253);
+            this.label3.Location = new System.Drawing.Point(668, 242);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 12);
             this.label3.TabIndex = 7;
@@ -125,10 +125,10 @@
             // lbl_player1
             // 
             this.lbl_player1.AutoSize = true;
-            this.lbl_player1.Font = new System.Drawing.Font("MS UI Gothic", 20F);
-            this.lbl_player1.Location = new System.Drawing.Point(357, 284);
+            this.lbl_player1.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.lbl_player1.Location = new System.Drawing.Point(337, 271);
             this.lbl_player1.Name = "lbl_player1";
-            this.lbl_player1.Size = new System.Drawing.Size(98, 27);
+            this.lbl_player1.Size = new System.Drawing.Size(142, 40);
             this.lbl_player1.TabIndex = 8;
             this.lbl_player1.Text = "Player1";
             // 

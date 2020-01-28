@@ -12,6 +12,7 @@ namespace mei1161
         LibUDP network;
         bool button_state = true;
         JankenForm janken_form;
+        IPAddress test;
         ListenerExceptionDelegate listener_exception_delegate;
 
         public delegate void JankenFormDelegate(IPAddress address);
@@ -23,7 +24,7 @@ namespace mei1161
             InitializeComponent();
             network = new LibUDP();
             listener_exception_delegate = new ListenerExceptionDelegate(ShowExceptionMessage);
-
+            textBox1.Text = "";
 
         }
 
@@ -103,6 +104,7 @@ namespace mei1161
 
         public void ShowJankenForm(IPAddress address)
         {
+            
             ShowConfigFormDelegate show_config = new ShowConfigFormDelegate(ShowConfigForm);
             janken_form = new JankenForm(show_config, address);
             janken_form.Show();
@@ -125,6 +127,18 @@ namespace mei1161
             MessageBox.Show(message);
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            IPAddress address;
+            if(IPAddress.TryParse(textBox1.Text, out address))
+            {
+                ShowJankenForm(address);
+            }
+            else
+            {
+                MessageBox.Show("つながらない");
+            }
+            
+        }
     }
 }
